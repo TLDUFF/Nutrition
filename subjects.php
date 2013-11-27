@@ -19,39 +19,51 @@ and open the template in the editor.
 
   <div onclick="runAccordion(1);">
     <div class="AccordionTitle" onselectstart="return false;">
-      Accordion 1
+      New Records
     </div>
   </div>
   <div id="Accordion1Content" class="AccordionContent">
     I Am Accordion 1.
+     <table>
+            <th>Subject ID</th>
+            <th>Name</span>
+            <th>Woman's <br/> Condition</th>
+            <th>Age</span>
+            <th>File Uploaded</th>
+            <th>View <br/> Report</th>
+     </table>
   </div>
+  
 
   <div onclick="runAccordion(2);">
     <div class="AccordionTitle" onselectstart="return false;">
-      Accordion 2
+      Flagged Records
     </div>
   </div>
   <div id="Accordion2Content" class="AccordionContent">
     I Am Accordion 2.
   </div>
+  
 
   <div onclick="runAccordion(3);">
     <div class="AccordionTitle" onselectstart="return false;">
-      Accordion 3
+      Printed Records
     </div>
   </div>
   <div id="Accordion3Content" class="AccordionContent">
     I Am Accordion 3.
   </div>
+ 
 
   <div onclick="runAccordion(4);">
     <div class="AccordionTitle" onselectstart="return false;">
-      Accordion 4
+      Less Than 3 Recalls Conducted
     </div>
   </div>
   <div id="Accordion4Content" class="AccordionContent">
     I Am Accordion 4.
   </div>
+  
 
   <div onclick="runAccordion(5);">
     <div class="AccordionTitle" onselectstart="return false;">
@@ -61,7 +73,7 @@ and open the template in the editor.
   <div id="Accordion5Content" class="AccordionContent">
     I Am Accordion 5.
   </div>
-
+  
 </div>
 </body>
 </html>
