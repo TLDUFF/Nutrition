@@ -1,0 +1,51 @@
+/* 
+    Document   : accordionContent
+    Created on : Nov 20, 2013, 12:30:56 PM
+    Author     : tluasduffield
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.AccordionTitle, .AccordionContent, .AccordionContainer
+{
+  position:relative;
+  width:100%;
+  background-color: indianred;
+}
+
+.AccordionTitle
+{
+  height:20px;
+  overflow:hidden;
+  cursor:pointer;
+  font-family: "Trebuchet MS", verdana, sans-serif;
+  font-size:12pt;
+  font-weight:bold;
+  vertical-align:middle;
+  text-align:center;
+  background-repeat:repeat-x;
+  display:table-cell;
+  -moz-user-select:none;
+  padding-left: 4px;
+  
+}
+
+.AccordionContent
+{
+  height:0px;
+  overflow:auto;
+  display:none; 
+  background-color: white;
+}
+
+.AccordionContainer
+{
+  border-top: solid 1px gainsboro;
+  border-bottom: solid 1px gainsboro;
+  border-left: solid 2px gainsboro;
+  border-right: solid 2px gainsboro;
+}
