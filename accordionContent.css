@@ -14,23 +14,25 @@ root {
 {
   position:relative;
   width:100%;
-  background-color: indianred;
+  
 }
 
 .AccordionTitle
 {
   height:20px;
+  width: 100%;
   overflow:hidden;
   cursor:pointer;
   font-family: "Trebuchet MS", verdana, sans-serif;
   font-size:12pt;
   font-weight:bold;
   vertical-align:middle;
-  text-align:center;
+  text-align:left;
   background-repeat:repeat-x;
-  display:table-cell;
+  /*display:table-cell;  this keeps "Title" sections to just the width of the text  */
   -moz-user-select:none;
   padding-left: 4px;
+  background-color: lightgrey;
   
 }
 
