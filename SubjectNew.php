@@ -3,9 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--<link rel="stylesheet" type="text/css" href="NutritionView.css" />-->
-        <link rel="stylesheet" type="text/css" href="subjectList.css" />
-        <link rel="stylesheet" type="text/css" href="accordionDivs.css" />
-        <!--<link rel="stylesheet" type="text/css" href="accordionContent.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="accordionDivs.css" />-->
+        <link rel="stylesheet" type="text/css" href="accordionContent.css" />
 <!--        <script src="myJS.js"></script>-->
         <script src="accordion.js"></script>
         <!--
@@ -41,6 +40,8 @@
          <h2>List of Nutrition Assessment Participants from <?php echo "$project" ?> </h2>
          <br /><br />
     </head>
+<!-- END HEADER -------------------------------------------------------------------------------------------------->
+
     <body>
         
         <?php
@@ -49,11 +50,11 @@
             $db = new Database();
             $db->Connect();
 
-
 /*
  * SQL statements to get Subject list for project.
  */
-            
+
+    // NEW RECORDS
             $sql_subjects = "SELECT s.subjectID, s.first_name, s.last_name, s.womans_condition, 
                     ROUND((DATEDIFF(CURDATE(), s.dob) / 365.25),0) as AGE, 
                     DATE_FORMAT(v.import_timestamp, '%b-%d-%Y' ) as UPLOAD
@@ -66,6 +67,7 @@
             
             $result_subjects=$db->Query($sql_subjects);
             
+    // FLAGGED RECORDS        
             $sql_flagged = "SELECT s.subjectID, s.first_name, s.last_name, s.womans_condition, 
                     ROUND((DATEDIFF(CURDATE(), s.dob) / 365.25),0) as AGE, 
                     s.comments,
@@ -78,6 +80,7 @@
                     
             $result_flagged=$db->Query($sql_flagged);
             
+    // PRINTED RECORDS        
             $sql_printed = "SELECT s.subjectID, s.first_name, s.last_name, s.womans_condition, 
                     ROUND((DATEDIFF(CURDATE(), s.dob) / 365.25),0) as AGE,
                     DATE_FORMAT(v.import_timestamp, '%b-%d-%Y' ) as UPLOAD
@@ -89,6 +92,7 @@
             
             $result_printed=$db->Query($sql_printed);
             
+    // INCOMPLETE INTERVIEWS         
             $sql_incentives = "SELECT s.subjectID, s.first_name, s.last_name, s.womans_condition, 
                     ROUND((DATEDIFF(CURDATE(), s.dob) / 365.25),0) as AGE, 
                     count(v.dateofinterview ) as NUM_INTERVIEWS,
@@ -106,15 +110,20 @@
 
 <?php require_once('subjects.php'); ?>
 
+<br />
+<br />
+
 <!-- CONTAINER -->
 
 <!-- NEW RECORDS -->
-    <div id="accordion" style="width:100%"> 
-        <section id="new" class="accordion-item">
-              <h3><a href="#new">New Records</a></h3>
+    <div onclick="runAccordion(1);">
+        <div class="AccordionTitle" onselectstart="return false;">
+          New Records
+        </div>
+    </div>
         
-     <div class="content">  
-        <div class="table">
+     <div id="Accordion1Content" class="AccordionContent">  
+        <table>
             <th>Subject ID</th>
             <th>Name</span>
             <th>Woman's <br/> Condition</th>
@@ -154,7 +163,7 @@
                                 '&SubjectID=' .$subject[0]. 
                                 '&Condition=' .$subject[3]. 
                                 '&Age=' .$subject[4]. 
-                                '">VIEW</a></td>';
+                                '" target="_blank">VIEW</a></td>';
                     echo '</tr>'; 
                     //end of row
 
@@ -162,9 +171,9 @@
 
                 }// end while      
           ?>
-        </div>    <!-- table -->  
+        
      </div> <!-- content -->
-</section>
+
    
               <!--<br />-->
 <!-- FLAGGED -->              
@@ -222,7 +231,7 @@
                                 '&SubjectID=' .$flagged[0]. 
                                 '&Condition=' .$flagged[3]. 
                                 '&Age=' .$flagged[4]. 
-                                '">VIEW</a></td>';
+                                '" target="_blank">VIEW</a></td>';
                     echo '</tr>'; 
                     //end of row
 
@@ -283,7 +292,7 @@
                                 '&SubjectID=' .$printed[0]. 
                                 '&Condition=' .$printed[3]. 
                                 '&Age=' .$printed[4]. 
-                                '">VIEW</a></td>';
+                                '" target="_blank">VIEW</a></td>';
                     echo '</tr>'; 
                     //end of row
 
