@@ -45,14 +45,6 @@ root {
   background-color: white;
 }
 
-.AccordionContainer
-{
-  /*border-top: solid 1px gainsboro;
-  border-bottom: solid 1px gainsboro;
-  border-left: solid 2px gainsboro;
-  border-right: solid 2px gainsboro;*/
-}
-
 h2
 {
   font-family: "Trebuchet MS", verdana, sans-serif;
@@ -97,4 +89,16 @@ tr {
     border-bottom-style: solid;
     border-bottom-color: darkgray;
     border-bottom-width: thin;  
+}
+
+#update {
+    float: right;
+    padding-top: 10px;
+    padding-right: 100px;
+}
+
+#update2 {
+    float: right;
+    padding-top: 10px;
+    padding-right: 200px;
 }
