@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-var ContentHeight = 200;
+var ContentHeight = 400;
 var TimeToSlide = 250.0;
 
 var openAccordion = '';
@@ -71,4 +71,3 @@ $("#accordion1").click(function(){runAccordion(1);});
 $("#accordion2").click(function(){runAccordion(2);});
 $("#accordion3").click(function(){runAccordion(3);});
 $("#accordion4").click(function(){runAccordion(4);});
-$("#accordion5").click(function(){runAccordion(5);});
