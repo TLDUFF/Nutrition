@@ -1,0 +1,162 @@
+/*
+    Document   : NutritionView
+    Created on : Jul 11, 2013, 1:39:32 PM
+    Author     : tluasduffield
+    Description:
+        Purpose of the stylesheet: format the Nutrition Assessment View
+        and Nutrition Benefits View Reports.
+*/
+
+root {
+    display: block;
+}
+
+@media print {
+
+        .page-break     { display: block; page-break-before: always;}
+        table { page-break-after:auto; }
+        div   { page-break-inside:avoid; }
+        tr    { page-break-after:auto; }
+        td    { page-break-inside:avoid; page-break-after:auto; }
+
+}
+
+#page_header {
+    font-family: "Trebuchet MS", verdana, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    color: indigo;
+    font-size: 22pt;
+    text-transform: uppercase;
+    padding: 2px 25px 0px 25px;
+}
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    font-family: "Trebuchet MS", verdana, sans-serif;
+    color: black;
+}
+
+#page_title {
+    color: black;
+    font-weight: bold;
+    font-size: 18pt;
+    text-transform: uppercase;
+    padding: 5px 25px 0px 25px;
+
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px black solid;
+    text-align: center;
+    font-family: "Trebuchet MS", verdana, sans-serif;
+    width: 100%; margin: 0; float: none;
+}
+
+tfoot td {
+   width: 93%;
+   text-align: left;
+   font-family: "Trebuchet MS", verdana, sans-serif;
+   border: 2px black solid;
+   padding: 0px 0px 0px 4px;
+}
+
+/*************HEADERS*******************/
+/*main header of table, where YOUR NUTRITION FACTS is. */
+#tbl_header {
+    color: white;
+    background-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    padding-top: 2px;
+
+}
+
+ /*this is the YOUR NUTRITION FACTS main header TEXT.*/
+#tbl_header_text{
+    color: white;
+    font-size: 18pt;
+    font-family: "Trebuchet MS", verdana, sans-serif;
+    font-family: verdana;
+    font-variant: small-caps;
+    text-align: center;
+    padding: 1px 15px 1px 15px;
+}
+/* these are the column headers for the table. */
+th {
+    background-color: indigo;
+    color: white;
+    font-size: 13.25pt;
+    text-transform: capitalize;
+    vertical-align: bottom;
+    padding: 5px 5px 1px 5px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+/***************ROWS*****************/
+
+tr.zebra1 {
+    background-color: white;
+    padding: 2px;
+    color: black;
+}
+
+tr.zebra2 {
+    background-color: lightgray;
+    padding: 2px;
+    color: black;
+}
+
+tr.foodGroup {
+    background-color: indigo;
+    padding: 0px;
+    text-align: left;
+}
+
+/***************DATA**************/
+td { /*default*/
+    color: black;
+    font-size: 11.5pt;
+    padding: 1px;
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: thin;
+    vertical-align: top;
+}
+
+td.foodGroup {
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 1px;
+    padding-left: 4px;
+    vertical-align: bottom;
+}
+
+td.nutrientBenefits {
+    text-align: left;
+    width: 30%;
+    font-size: 10.5pt;
+}
+
+td.firstColumn {
+    text-align: left;
+        // width specified in reports.
+}
+
+td.secondColumn {
+        width: 20%;
+}
+
+td.footer {
+    font-size: 9.5pt;
+}
+
