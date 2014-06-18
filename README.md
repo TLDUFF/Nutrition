@@ -1,12 +1,11 @@
-subject-list-reports
+Nutrition_Reporting_Tool_ui
 ====================
 
-Lists subjects in a table, with options to open report for printing.
+Lists records of Nutrition subjects.  
+New Records
+Flagged Records
+Printed Records
+One Recall Completed (RSG Only)
 
-Testing first repo.
-
-Documenting changes for:
-    - accordion list
-    - open report view in new tab
-    - clean page breaks
-    - checkboxes for printed, flagged records
+One interface per project.  Has links to cover letter and report to enable printing.
+Options to check off if report was printed, has to be flagged, or should be moved back to new records.
