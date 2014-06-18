@@ -1,9 +1,8 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*
+ * Opens and closes accordions on subjectList.php page (see subjects.php)
  */
 
-var ContentHeight = 400;
+var ContentHeight = 300;
 var TimeToSlide = 250.0;
 
 var openAccordion = '';
@@ -16,9 +15,7 @@ function runAccordion(index)
     nID = '';
   }
     set(new Date().getTime(),TimeToSlide,openAccordion, nID);
-  //setTimeout(function(){animate(new Date().getTime(),TimeToSlide,openAccordion, nID );}, 33);
-  //animate(new Date().getTime() , TimeToSlide,openAccordion,nID);
-  
+
   openAccordion = nID;
 }
 
@@ -27,18 +24,18 @@ function set(lastTick, timeLeft, closingId, openingId)
     setTimeout(function(){animate(lastTick,timeLeft,closingId, openingId );}, 33);
 }
 function animate(lastTick, timeLeft, closingId, openingId)
-{  
+{
   var curTick = new Date().getTime();
   var elapsedTicks = curTick - lastTick;
-  
+
   var opening = (openingId == '') ? null : document.getElementById(openingId);
   var closing = (closingId == '') ? null : document.getElementById(closingId);
- 
+
   if(timeLeft <= elapsedTicks)
   {
     if(opening != null)
       opening.style.height = ContentHeight + 'px';
-    
+
     if(closing != null)
     {
       closing.style.display = 'none';
@@ -46,7 +43,7 @@ function animate(lastTick, timeLeft, closingId, openingId)
     }
     return;
   }
- 
+
   timeLeft -= elapsedTicks;
   var newClosedHeight = Math.round((timeLeft/TimeToSlide) * ContentHeight);
 
@@ -56,15 +53,13 @@ function animate(lastTick, timeLeft, closingId, openingId)
       opening.style.display = 'block';
     opening.style.height = (ContentHeight - newClosedHeight) + 'px';
   }
-  
+
   if(closing != null)
   {
-      
+
     closing.style.height = newClosedHeight + 'px';
   }
     set(curTick,timeLeft,closingId, openingId);
-    //setTimeout(function(){animate(curTick,timeLeft,closingId,openingId);}, 33);
-  //animate(curTick,timeLeft,closingId,openingId);
 }
 
 $("#accordion1").click(function(){runAccordion(1);});
