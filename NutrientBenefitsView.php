@@ -81,7 +81,7 @@
                     $stripe=($count%2>0)?'class="zebra1"':'class="zebra2"';
 
 
-                   if ($rows[1] == 'Retinol*' && $id != 1) { //break into two pages
+                   if ($rows[1] == 'Vitamin B6' && $id != 1) { //break into two pages
                                  echo '</tbody><tfoot>
                                    <td class ="footer" colspan='. $colspan . '>
                                       NOTE: Please consult with your doctor/health care provider if you
@@ -90,7 +90,7 @@
                                    </td></tfoot></table><br /><table class="page-break">';
           ?>
                     <!-- Repeat header on next page -->
-                    <table>
+                       <table>
                        <thead> <tr id="tbl_header">
                            <td id="tbl_header_text" colspan= <?php echo $colspan ?>>
                            Nutrient Benefits and Sources for <?php echo $Condition ?> Women
@@ -135,8 +135,8 @@
                         $db2->Connect();
                         $result_foodsources=$db2->Query($sql_4);
                         $foodsArray= array();
-                                             
-                      while($rows2=mysql_fetch_array($result_foodsources)){
+
+                        while($rows2=mysql_fetch_array($result_foodsources)){
                             $foodsArray[] = $rows2[0];
                         } //end while
 
@@ -153,7 +153,9 @@
                                 break;
                             case 'Retinol*' : echo '<td class="nutrientBenefits" >',
                                     $finalstring = implode(', ', $foodsArray);
-                                    echo '. It is important during pregnancy not to get too much retinol (Vitamin A from animal sources) as high doses can cause birth defects.  Vitamin A from plant sources is called beta-carotene (see above).';
+                                    echo '. It is important during pregnancy not to get too much retinol ';
+                                    echo '(Vitamin A from animal sources) as high doses can cause birth defects. ';
+                                    echo 'Vitamin A from plant sources is called beta-carotene (see above).';
                                     echo '</td>';
                                 break;
                             default : echo '<td class="nutrientBenefits" >',
@@ -180,8 +182,6 @@
     </center>
     </body>
 
-
         <?php
             mysql_close();
         ?>
-
