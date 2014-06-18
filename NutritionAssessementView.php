@@ -3,7 +3,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="NutritionView.css" />
-        <!--<link rel="stylesheet" href="print.css" type="text/css" media="print" />-->
 
         <?php   // Display correct header for Project
             if(isset($_GET['project'])){
@@ -25,13 +24,14 @@
     <body>
 
         <?php
-        //Get passed variables: SubjectID, Condition, Age;
-            $SubjectID = $_GET['SubjectID'];
-            //echo "Subject ID = ". $SubjectID;
+        //Get passed variables: StudyID, Condition, Age, Interviews;
+            $StudyID = $_GET['StudyID'];
+
             $Condition = $_GET['Condition'];
-            //echo " Condition = ". $Condition;
+
             $Age = $_GET['Age'];
-            //echo " Age = " .$Age;
+
+            $Interviews = $_GET['Interviews'];
 
             require_once('Database.php');
 
@@ -44,6 +44,7 @@
                 case "Adult": $id='1'; break;
                 case "Pregnant": $id='2'; break;
                 case "Lactating": $id='3'; break;
+                case "Pregnant/Lactating": $id='4'; break;
 
             }//end switch
 
@@ -55,7 +56,7 @@
             $sql_subjects = "SELECT first_name, last_name
              FROM subject
              WHERE study = '$project'
-                and subjectID = '$SubjectID'";
+                and subjectID = '$StudyID'";
 
             $result_subjects=$db->Query($sql_subjects);
             $subject_array = mysql_fetch_array($result_subjects, MYSQL_ASSOC);
@@ -66,12 +67,12 @@
             WHERE nutrient.id = rda.nutrient_id
             AND rda.type_of_woman_id = '$id'
             AND nutrient.id IN ('8', '13', '14', '15', '16', '17', '18', '19', '20',
-               '21', '22', '23', '24')
+               '21', '22', '23', '24', '29')
             ORDER BY nutrient.name";
 
             $result_nutrients=$db->Query($sql_nutrients);
 
-             $sql_foodgroups="SELECT nutrient.id, nutrient.name,
+            $sql_foodgroups="SELECT nutrient.id, nutrient.name,
                  rda.value, nutrient.unit
             FROM nutrient, rda
             WHERE nutrient.id = rda.nutrient_id
@@ -80,16 +81,18 @@
             ORDER BY nutrient.name";
 
             $result_foodgroups=$db->Query($sql_foodgroups);
-
+            
+            
             $sql_subjectFood="SELECT
+                ROUND(BetaCarotene_avg, 0) as `Beta-carotene`,
                 ROUND(Calcium_avg, 0) as Calcium,
                 ROUND(Choline_avg, 0) as Choline,
                 ROUND(DHA_EPA_avg, 2) as DHA_EPA,
                 ROUND(Folate_avg, 0) as Folate,
                 ROUND(Iron_avg, 0) as Iron,
                 ROUND(Potassium_avg, 0) as Potassium,
+                ROUND(Retinol_Avg, 0) as Retinol,
                 ROUND(Sodium_avg, 0) as Sodium,
-                ROUND(VitA_Avg, 0) as VitA,
                 ROUND(VitB12_avg, 1) as VitB12,
                 ROUND(VitB6_avg, 1) as VitB6,
                 ROUND(VitC_avg, 0) as VitC,
@@ -98,34 +101,35 @@
                 ROUND(VegServ_avg, 0) as VegServ,
                 ROUND(FruitServ_avg, 0) as FruitServ
             FROM subject_avg_food_view
-            WHERE SubjectID = '$SubjectID'";
+            WHERE SubjectID = '$StudyID'";
 
             $result_subjectFood=$db->Query($sql_subjectFood);
             $food_array = mysql_fetch_array($result_subjectFood, MYSQL_NUM);
 
             $sql_subjectSuppl="SELECT
+                ROUND(BetaCarotene_avg, 0) as `Beta-carotene`,
                 ROUND(Calcium_avg, 0) as Calcium,
                 ROUND(Choline_avg, 0) as Choline,
                 ROUND(DHA_EPA_avg, 2) as DHA_EPA,
                 ROUND(Folate_avg, 0) as Folate,
                 ROUND(Iron_avg, 0) as Iron,
                 ROUND(Potassium_avg, 0) as Potassium,
+                ROUND(Retinol_Avg, 0) as Retinol,
                 ROUND(Sodium_avg, 0) as Sodium,
-                ROUND(VitA_Avg, 0) as VitA,
                 ROUND(VitB12_avg, 1) as VitB12,
                 ROUND(VitB6_avg, 1) as VitB6,
                 ROUND(VitC_avg, 0) as VitC,
                 ROUND(VitD_avg, 0) as VitD,
                 ROUND(Zinc_avg, 0) as Zinc
             FROM subject_avg_suppl_view
-            WHERE SubjectID = '$SubjectID'";
+            WHERE SubjectID = '$StudyID'";
 
             $result_subjectSuppl=$db->Query($sql_subjectSuppl);
             $suppl_array = mysql_fetch_array($result_subjectSuppl, MYSQL_NUM);
+
         ?>
 
 <!--/**Start report output here.**/ -->
-
 
        <center>
                 <p> Name:   <?php echo implode(" ", $subject_array ); ?></p>
@@ -161,13 +165,14 @@
                     echo '<tr '.$stripe.'>';
 
                         // Nutrient/Food Group Names with Units
-                        echo '<td class="firstColumn" width="20%">', $nutrients[1].' ('.$nutrients[3].')', '</td>';
+                        echo '<td class="firstColumn" width="25%">', $nutrients[1].' ('.$nutrients[3].')', '</td>';
 
                         // From Food
-                        echo '<td width="13%">', $food_array[$count]. '</td>';
+                        echo '<td width="10%">', $food_array[$count]. '</td>';
 
                         // From Supplements
                         echo '<td>', $suppl_array[$count]. '</td>';
+
 
                         // From Food and Supplements
                         echo '<td>', ($food_array[$count] + $suppl_array[$count]). '</td>';
@@ -196,21 +201,27 @@
 
                         echo '<tr '.$stripe.'>';
                             // Food Groups with Units
-                            echo '<td class="firstColumn">', $foodGroups[1].' ('.$foodGroups[3].')', '</td>';
+                            echo '<td class="firstColumn" width="25%">', $foodGroups[1].' ('.$foodGroups[3].')', '</td>';
+
                             // From Food
-                            echo '<td width="17%">', $food_array[$count]. '</td>';
+                            echo '<td>', $food_array[$count]. '</td>';
+
                             // From Supplements
                             echo '<td> N/A </td>';
+
                             // From Food and Supplements
                             echo '<td>', $food_array[$count]. '</td>';
+
                             // Recommended Intake
                             echo '<td width="25%">'; switch ($foodGroups[2]) {
                                             case '': echo 'Not Determined'; //fill NULL values
                                             default : echo $foodGroups[2];
                                          } // end switch
                             echo '</td>';
+
                         echo '</tr>';
                         //end of row
+
 
                         $count++;
 
@@ -220,10 +231,11 @@
 
             <tfoot>
             <td  class ="footer" colspan="5">
-                NOTE: Values are an average of three (3) days;
+                NOTE: Values are an average of <?php echo "$Interviews" ?> days;
                 Recommended Intake based on Dietary Reference Intakes: Recommended Dietary Allowances (RDA),
-                established by the Institute of Medicine. <br />
-                Abbreviations: DHA - Docosahexaenoic Acid, EPA - Eicosapentaenoic Acid (omega-3 fatty acids)
+                established by the Institute of Medicine.<br>
+                Abbreviations: DHA - Docosahexaenoic Acid, EPA - Eicosapentaenoic Acid (omega-3 fatty acids)<br>
+                * Retinol is the form of Vitamin A from animal sources.
             </td>
             </tfoot>
 
@@ -242,9 +254,5 @@
          //Table with nutrients and their benefits
          require_once ("NutrientBenefitsView.php");
        ?>
-
     </body>
-    <footer>
-    </footer>
-
 </html>
