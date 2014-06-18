@@ -19,7 +19,7 @@
                 WHERE nutrient.id = rda.nutrient_id
                 AND rda.type_of_woman_id = '$id'
                 AND nutrient.id IN ('8', '13', '14', '15', '16', '17', '18', '19', '20',
-                   '21', '22', '23', '24')
+                   '21', '22', '23', '24', '29')
                 ORDER BY nutrient.name";
 
             $result_benefits=$db->Query($sql_3);
@@ -36,6 +36,10 @@
                     break;
                 case "Lactating":
                     $id='3';
+                    $colspan = 4;
+                    break;
+                case "Pregnant/Lactating":
+                    $id='4';
                     $colspan = 4;
                     break;
 
@@ -77,7 +81,7 @@
                     $stripe=($count%2>0)?'class="zebra1"':'class="zebra2"';
 
 
-                   if ($rows[1] == 'Vitamin A' && $id != 1) { //break into two pages
+                   if ($rows[1] == 'Retinol*' && $id != 1) { //break into two pages
                                  echo '</tbody><tfoot>
                                    <td class ="footer" colspan='. $colspan . '>
                                       NOTE: Please consult with your doctor/health care provider if you
@@ -86,11 +90,11 @@
                                    </td></tfoot></table><br /><table class="page-break">';
           ?>
                     <!-- Repeat header on next page -->
-                       <table>
+                    <table>
                        <thead> <tr id="tbl_header">
                            <td id="tbl_header_text" colspan= <?php echo $colspan ?>>
                            Nutrient Benefits and Sources for <?php echo $Condition ?> Women
-  </td></tr>
+                           </td></tr>
                        <tr>
                            <th align="left">Nutrient</th>
                            <th>Benefits to You</th>
@@ -105,7 +109,8 @@
 
                     //then print the row
                     echo '<tr '.$stripe.'>';
-                        echo '<td class="firstColumn", width="8%" >', $rows[1], '</td>';// Nutrient
+                        // Nutrient
+                        echo '<td class="firstColumn", width="8%" >'. $rows[1]. '</td>';
 
                         //format table for adult or pregnant or breastfeeding data.
                         switch ($id) {
@@ -130,8 +135,8 @@
                         $db2->Connect();
                         $result_foodsources=$db2->Query($sql_4);
                         $foodsArray= array();
-
-                        while($rows2=mysql_fetch_array($result_foodsources)){
+                                             
+                      while($rows2=mysql_fetch_array($result_foodsources)){
                             $foodsArray[] = $rows2[0];
                         } //end while
 
@@ -142,8 +147,18 @@
                                     'Try to minimize excess sodium intake by selecting unprocessed,'
                                      .'fresh foods rather than manufactured and processed foods. </td>';
                                 break;
+                            case 'Beta-carotene' : echo '<td class="nutrientBenefits" >',
+                                    'Form of Vitamin A from plant sources such as '. $finalstring = implode(', ', $foodsArray);
+                                     echo '</td>';
+                                break;
+                            case 'Retinol*' : echo '<td class="nutrientBenefits" >',
+                                    $finalstring = implode(', ', $foodsArray);
+                                    echo '. It is important during pregnancy not to get too much retinol (Vitamin A from animal sources) as high doses can cause birth defects.  Vitamin A from plant sources is called beta-carotene (see above).';
+                                    echo '</td>';
+                                break;
                             default : echo '<td class="nutrientBenefits" >',
-                                        $finalstring = implode(',  ', $foodsArray);
+                                    $finalstring = implode(', ', $foodsArray) ;
+                                        $finalstring = implode(', ', $foodsArray);
                                         '</td>';
                         }//end switch
 
@@ -162,10 +177,11 @@
            </tfoot>
 <!--    End Table -->
         </table>
+    </center>
+    </body>
+
 
         <?php
             mysql_close();
         ?>
 
-    </center>
-    </body>
