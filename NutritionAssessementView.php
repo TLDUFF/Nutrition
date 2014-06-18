@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -81,8 +82,7 @@
             ORDER BY nutrient.name";
 
             $result_foodgroups=$db->Query($sql_foodgroups);
-            
-            
+ 
             $sql_subjectFood="SELECT
                 ROUND(BetaCarotene_avg, 0) as `Beta-carotene`,
                 ROUND(Calcium_avg, 0) as Calcium,
@@ -235,7 +235,10 @@
                 Recommended Intake based on Dietary Reference Intakes: Recommended Dietary Allowances (RDA),
                 established by the Institute of Medicine.<br>
                 Abbreviations: DHA - Docosahexaenoic Acid, EPA - Eicosapentaenoic Acid (omega-3 fatty acids)<br>
-                * Retinol is the form of Vitamin A from animal sources.
+                * RDA is for total Vitamin A, mostly from retinol and beta-carotene combined.  Retinol is the form of 
+                Vitamin A from animal sources and can be toxic and cause birth defects at high intakes.  Beta-carotene
+                is the form of Vitamin A from plant sources and is not harmful at high intakes.  Please consult your 
+                physician for questions or concerns.
             </td>
             </tfoot>
 
