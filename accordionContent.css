@@ -1,12 +1,12 @@
-/* 
+/*
     Document   : accordionContent
     Created on : Nov 20, 2013, 12:30:56 PM
     Author     : tluasduffield
     Description:
-        Purpose of the stylesheet follows.
+        Formatting for Accordion Lists on subjectList.php and subjects.php
 */
 
-root { 
+root {
     display: block;
 }
 
@@ -14,7 +14,7 @@ root {
 {
   position:relative;
   width:100%;
-  
+
 }
 
 .AccordionTitle
@@ -29,22 +29,20 @@ root {
   vertical-align:middle;
   text-align:left;
   background-repeat:repeat-x;
-  /*display:table-cell;  this keeps "Title" sections to just the width of the text  */
   -moz-user-select:none;
   padding-left: 8px;
   background-color: lightgrey;
   border-bottom: solid 5px white;
-  
+
 }
 
 .AccordionContent
 {
   height:0px;
   overflow:auto;
-  display:none; 
+  display:none;
   background-color: white;
 }
-
 h2
 {
   font-family: "Trebuchet MS", verdana, sans-serif;
@@ -56,7 +54,6 @@ h2
 table {
     border-collapse: collapse;
     border: 3px black solid;
-    /*width: 93%;*/
     text-align: center;
     font-family: "Trebuchet MS", verdana, sans-serif;
     width: 100%; margin: 0; float: none;
@@ -75,9 +72,7 @@ th {
     background-color: gainsboro;
     color: indigo;
     font-size: 13pt;
-    /*text-transform: capitalize;*/
     vertical-align: bottom;
-    /*text-decoration: underline;*/
     padding: 10px 5px 5px 5px;
     border-bottom-width: 2px;
     border-bottom-style: solid;
@@ -88,7 +83,7 @@ th {
 tr {
     border-bottom-style: solid;
     border-bottom-color: darkgray;
-    border-bottom-width: thin;  
+    border-bottom-width: thin;
 }
 
 #update {
@@ -100,5 +95,18 @@ tr {
 #update2 {
     float: right;
     padding-top: 10px;
-    padding-right: 200px;
+    padding-right: 100px;
+}
+
+#update3 {
+    float: right;
+    padding-top: 10px;
+    padding-right: 100px;
+}
+
+#logout {
+    text-align: right;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: bold;
 }
